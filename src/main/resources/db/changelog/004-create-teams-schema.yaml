@@ -1,0 +1,20 @@
+databaseChangeLog:
+  - changeSet:
+      id: 002-create-teams-schema
+      author: Valentin Pikas
+      changes:
+        - createTable:
+            tableName: TEAM
+            columns:
+              - column:
+                  name: ID
+                  type: UUID
+                  defaultValueComputed: 'uuid_generate_v4()'
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: NAME
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false

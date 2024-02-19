@@ -1,0 +1,40 @@
+databaseChangeLog:
+  - changeSet:
+      id: 003-create-tasks-schema
+      author: Valentin Pikas
+      changes:
+        - createTable:
+            tableName: TASK
+            columns:
+              - column:
+                  name: ID
+                  type: UUID
+                  defaultValueComputed: 'uuid_generate_v4()'
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: TITLE
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: DESCRIPTION
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: PRIORITY
+                  type: VARCHAR(255)
+              - column:
+                  name: STATUS
+                  type: VARCHAR(50)
+              - column:
+                  name: CREATE_TASK_TIME
+                  type: timestamp
+              - column:
+                  name: START_TASK_TIME
+                  type: timestamp
+              - column:
+                  name: FINISH_TASK_TIME
+                  type: timestamp
