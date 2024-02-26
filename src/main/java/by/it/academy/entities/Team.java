@@ -18,6 +18,7 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @Entity
 @Table(name = "TEAM")
 public class Team {
+
     @Id
     @GeneratedValue(strategy = IDENTITY)
     @Column(name = "ID")
@@ -25,6 +26,7 @@ public class Team {
 
     @Column(name = "NAME")
     private String name;
+
     @ManyToMany()
     @JoinTable(name = "TEAM_EMPLOYEE",
             joinColumns = {@JoinColumn(name = "TEAM_ID")},

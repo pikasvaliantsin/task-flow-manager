@@ -1,23 +1,24 @@
 package by.it.academy.services.tasks;
 
 import by.it.academy.dto.requests.CreateTaskRequest;
-import by.it.academy.dto.responses.ReadTaskResponse;
+import by.it.academy.dto.responses.ReadTaskDto;
 
 import java.util.List;
 import java.util.UUID;
 
 public interface TaskService {
-    List<ReadTaskResponse> readTasks();
 
-    ReadTaskResponse createTask(CreateTaskRequest request);
+    List<ReadTaskDto> getTasks();
 
-    ReadTaskResponse updateTask(UUID id, CreateTaskRequest request);
+    ReadTaskDto createTask(CreateTaskRequest request);
+
+    ReadTaskDto updateTask(UUID id, CreateTaskRequest request);
 
     void deleteTask(UUID id);
 
-    boolean changeStatus(UUID id, String status);
-
     boolean changePriority(UUID id, String priority);
 
-    ReadTaskResponse getTaskById(UUID id);
+    ReadTaskDto getTaskById(UUID id);
+
+    ReadTaskDto getTaskByPersonalNumber(Integer number);
 }

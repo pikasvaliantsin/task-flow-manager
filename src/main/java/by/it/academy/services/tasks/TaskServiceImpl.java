@@ -1,8 +1,10 @@
 package by.it.academy.services.tasks;
 
 import by.it.academy.dto.requests.CreateTaskRequest;
-import by.it.academy.dto.responses.ReadTaskResponse;
+import by.it.academy.dto.responses.PersonalNumberDto;
+import by.it.academy.dto.responses.ReadTaskDto;
 import by.it.academy.entities.Task;
+import by.it.academy.feingClient.PersonalNumberApiClient;
 import by.it.academy.mappers.TaskMapper;
 import by.it.academy.repositories.tasks.TaskRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -19,25 +21,31 @@ public class TaskServiceImpl implements TaskService {
     private final TaskRepository taskRepository;
     private final TaskMapper taskMapper;
 
+    private final PersonalNumberApiClient personalNumberApiClient;
+
+    final int COUNT_CHANGED_ROWS = 0;
+
     @Transactional(readOnly = true)
     @Override
-    public List<ReadTaskResponse> readTasks() {
+    public List<ReadTaskDto> getTasks() {
         List<Task> taskList = taskRepository.findAll();
-        return taskMapper.mapEntityListToDtoList(taskList);
+        return taskMapper.mapTasksToDtos(taskList);
     }
 
     @Transactional
     @Override
-    public ReadTaskResponse createTask(CreateTaskRequest request) {
-        Task task = taskMapper.mapToTaskEntity(request);
+    public ReadTaskDto createTask(CreateTaskRequest request) {
+        Task task = taskMapper.mapToTask(request);
+        PersonalNumberDto personalNumberDto = personalNumberApiClient.getPersonalNumber();
+        task.setPersonalNumber(personalNumberDto.getPersonalNumber());
         Task savedTask = taskRepository.save(task);
-        return taskMapper.mapToTaskDTO(savedTask);
+        return taskMapper.mapToDto(savedTask);
     }
 
     @Transactional
     @Override
-    public ReadTaskResponse updateTask(UUID id, CreateTaskRequest request) {
-        Task taskForUpdate = taskMapper.mapToTaskEntity(request);
+    public ReadTaskDto updateTask(UUID id, CreateTaskRequest request) {
+        Task taskForUpdate = taskMapper.mapToTask(request);
         taskForUpdate.setId(id);
         taskRepository.save(taskForUpdate);
         return getTaskById(id);
@@ -46,24 +54,13 @@ public class TaskServiceImpl implements TaskService {
     @Transactional
     @Override
     public void deleteTask(UUID id) {
-        if (taskRepository.deleteTaskById(id) == 0) {
-            throw new EntityNotFoundException(id.toString());
-        }
-    }
-
-    @Transactional
-    @Override
-    public boolean changeStatus(UUID id, String status) {
-        if (taskRepository.changeStatus(id, status) == 0) {
-            throw new EntityNotFoundException(id.toString());
-        }
-        return true;
+        taskRepository.deleteTaskById(id);
     }
 
     @Transactional
     @Override
     public boolean changePriority(UUID id, String priority) {
-        if(taskRepository.changePriority(id,priority)==0){
+        if (taskRepository.changePriority(id, priority) == COUNT_CHANGED_ROWS) {
             throw new EntityNotFoundException(id.toString());
         }
         return true;
@@ -71,8 +68,15 @@ public class TaskServiceImpl implements TaskService {
 
     @Transactional(readOnly = true)
     @Override
-    public ReadTaskResponse getTaskById(UUID id) {
+    public ReadTaskDto getTaskById(UUID id) {
         Task task = taskRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(id.toString()));
-        return taskMapper.mapToTaskDTO(task);
+        return taskMapper.mapToDto(task);
+    }
+
+    @Override
+    public ReadTaskDto getTaskByPersonalNumber(Integer number) {
+        Task task = taskRepository.findTaskByPersonalNumber(number)
+                .orElseThrow(() -> new EntityNotFoundException(number.toString()));
+        return taskMapper.mapToDto(task);
     }
 }

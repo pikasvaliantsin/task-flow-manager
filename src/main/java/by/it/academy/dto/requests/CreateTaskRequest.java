@@ -13,21 +13,29 @@ import java.time.LocalDateTime;
 
 @Data
 public class CreateTaskRequest {
+
     @NotBlank(message = "Title cannot be empty")
     @Size(max = 255, message = "Title cannot be more than 255 symbols")
     private String title;
+
     @NotBlank(message = "Title cannot be empty")
     @Size(max = 255, message = "Title cannot be more than 255 symbols")
     private String description;
+
     @NotNull(message = "Priority cannot be null")
     private Priority priority;
+
     @NotNull(message = "Status cannot be null")
     private Status status;
+
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime createTaskTime;
+
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime startTaskTime;
+
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime finishTaskTime;
+
     private TeamShortDto team;
 }

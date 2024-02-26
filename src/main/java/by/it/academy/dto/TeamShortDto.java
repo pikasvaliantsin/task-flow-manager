@@ -6,6 +6,7 @@ import java.util.UUID;
 
 @Data
 public class TeamShortDto {
+
     private UUID id;
     private String name;
 }

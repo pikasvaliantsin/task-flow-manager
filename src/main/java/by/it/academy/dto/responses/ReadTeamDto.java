@@ -8,7 +8,8 @@ import java.util.List;
 import java.util.UUID;
 
 @Data
-public class ReadTeamResponse {
+public class ReadTeamDto {
+
     private UUID id;
     private String name;
     private List<EmployeeShortDto> employees;

@@ -1,21 +1,22 @@
 package by.it.academy.services.employees;
 
 import by.it.academy.dto.requests.CreateEmployeeRequest;
-import by.it.academy.dto.responses.ReadEmployeeResponse;
+import by.it.academy.dto.responses.ReadEmployeeDto;
 
 import java.util.List;
 import java.util.UUID;
 
 public interface EmployeeService {
-    List<ReadEmployeeResponse> readEmployee();
 
-    ReadEmployeeResponse createEmployee(CreateEmployeeRequest request);
+    List<ReadEmployeeDto> getEmployees();
 
-    ReadEmployeeResponse updateEmployee(UUID id, CreateEmployeeRequest request);
+    ReadEmployeeDto createEmployee(CreateEmployeeRequest request);
+
+    ReadEmployeeDto updateEmployee(UUID id, CreateEmployeeRequest request);
 
     void deleteEmployee(UUID id);
 
-    ReadEmployeeResponse getUserById(UUID id);
+    ReadEmployeeDto getEmployeeById(UUID id);
 
-    public List<ReadEmployeeResponse> findAllEmployeesByTeamId(UUID team_id);
+    public List<ReadEmployeeDto> getAllEmployeesByTeamId(UUID teamId);
 }

@@ -19,27 +19,10 @@ public class TaskRepositoryCustomImpl extends QuerydslRepositorySupport implemen
 
     private final JPAQueryFactory jpaQueryFactory;
 
-    @Transactional
-    @Override
-    public long changeStatus(UUID id, String status) {
-        Status newStatus = Status.valueOf(status);
-        return jpaQueryFactory.update(task)
-                .set(task.status, newStatus)
-                .where(task.id.eq(id))
-                .execute();
-    }
-
     @Override
     public long changePriority(UUID id, String priority) {
         return jpaQueryFactory.update(task)
                 .set(task.priority, Priority.valueOf(priority))
-                .where(task.id.eq(id))
-                .execute();
-    }
-
-    @Override
-    public long deleteTaskById(UUID id) {
-        return jpaQueryFactory.delete(task)
                 .where(task.id.eq(id))
                 .execute();
     }

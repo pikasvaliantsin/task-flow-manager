@@ -11,6 +11,7 @@ import static by.it.academy.entities.QEmployee.employee;
 import static by.it.academy.entities.QTeam.team;
 
 public class EmployeeRepositoryCustomImpl extends QuerydslRepositorySupport implements EmployeeRepositoryCustom {
+
     public EmployeeRepositoryCustomImpl(JPAQueryFactory jpaQueryFactory) {
         super(Employee.class);
         this.jpaQueryFactory = jpaQueryFactory;
@@ -19,17 +20,11 @@ public class EmployeeRepositoryCustomImpl extends QuerydslRepositorySupport impl
     private final JPAQueryFactory jpaQueryFactory;
 
     @Override
-    public List<Employee> findAllEmployeesByTeamId(UUID team_id) {
+    public List<Employee> findAllEmployeesByTeamId(UUID teamId) {
         return jpaQueryFactory.select(employee)
                 .from(employee)
                 .join(employee.teams, team)
-                .where(team.id.eq(team_id))
+                .where(team.id.eq(teamId))
                 .fetch();
-    }
-
-    public long deleteEmployeeById(UUID id){
-        return jpaQueryFactory.delete(employee)
-                .where(employee.id.eq(id))
-                .execute();
     }
 }

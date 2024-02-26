@@ -24,6 +24,11 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
+                  name: PERSONAL_NUMBER
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
                   name: PRIORITY
                   type: VARCHAR(255)
               - column:

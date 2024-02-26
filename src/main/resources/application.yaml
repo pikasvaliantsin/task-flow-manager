@@ -11,3 +11,8 @@ spring:
   jpa:
     hibernate:
       ddl-auto: none
+
+services:
+  external:
+    personal-number-api:
+      url: http://localhost:8081/api/v1/personal_number

@@ -20,9 +20,7 @@ public class LoggerAspect {
     private static final String LOG_RESPONSE_PATTERN = "{} -> {}:{}:{}";
 
     @Pointcut("execution(* by.it.academy.controllers..*(..))")
-    public void pointCut(){
-
-    }
+    public void pointCut(){}
 
     @Before("pointCut()")
     public void logRequest(JoinPoint joinPoint){

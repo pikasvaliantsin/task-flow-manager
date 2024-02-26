@@ -22,10 +22,14 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @Entity
 @Table(name = "TASK")
 public class Task {
+
     @Id
     @GeneratedValue(strategy = IDENTITY)
     @Column(name = "ID")
     private UUID id;
+
+    @Column(name = "PERSONAL_NUMBER")
+    private Integer personalNumber;
 
     @Column(name = "TITLE")
     private String title;

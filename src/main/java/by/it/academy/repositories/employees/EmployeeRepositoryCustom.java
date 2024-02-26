@@ -7,7 +7,4 @@ import java.util.UUID;
 
 public interface EmployeeRepositoryCustom {
     List<Employee> findAllEmployeesByTeamId(UUID team_id);
-
-    long deleteEmployeeById(UUID id);
-
 }

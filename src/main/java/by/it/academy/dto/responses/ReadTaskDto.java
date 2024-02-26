@@ -5,14 +5,15 @@ import by.it.academy.enums.Priority;
 import by.it.academy.enums.Status;
 import lombok.Data;
 
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Data
-public class ReadTaskResponse {
+public class ReadTaskDto {
+
     private UUID id;
     private String title;
     private String description;
+    private Integer personalNumber;
     private Priority priority;
     private Status status;
     private String createTaskTime;
