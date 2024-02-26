@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - preConditions:
+      - runningAs:
+          username: postgres
+          password: postgres
+  - changeSet:
+      id: 001-create-uuid-extension
+      author: Valentin Pikas
+      changes:
+        - sqlFile:
+            path: db/sql/extension.sql

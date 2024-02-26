@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - include:
+      file: classpath:db/changelog/001-create-uuid-extension.yaml
+  - include:
+      file: classpath:db/changeLog/002-create-employees-schema.yaml
+  - include:
+      file: classpath:db/changeLog/003-create-tasks-schema.yaml
+  - include:
+      file: classpath:db/changeLog/004-create-teams-schema.yaml
+  - include:
+      file: classpath:db/changeLog/005-employee-task-team-relationships.yaml
+  - include:
+      file: classpath:db/changeLog/006-add-data-to-tables.yaml

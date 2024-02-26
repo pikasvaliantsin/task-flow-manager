@@ -1,0 +1,27 @@
+databaseChangeLog:
+  - changeSet:
+      id: 005-add-data-to-tables
+      author: Valentin Pikas
+      changes:
+        - sql:
+            sql:
+              INSERT INTO TEAM(ID,NAME)
+              VALUES
+              ('91ef70b9-1e6b-439b-b148-0d9d1c43c21c','TEAM A'),
+              ('ed2eaca6-4dc1-4929-a58d-181edc5b2f59','TEAM B');
+              
+              INSERT INTO TASK (ID, TITLE, DESCRIPTION, PERSONAL_NUMBER, PRIORITY, STATUS, CREATE_TASK_TIME, TEAM_ID)
+              VALUES
+              ('3932391a-30ef-4c22-8b00-d385cd657733', 'Task 1', 'Description 1','21235423', 'HIGH', 'NEW', '2024-02-20 08:00:00', '91ef70b9-1e6b-439b-b148-0d9d1c43c21c'),
+              ('0f1f0d76-298c-49bd-b463-abe8015119ad', 'Task 2', 'Description 2','32422123', 'MEDIUM', 'NEW', '2024-02-21 09:00:00', 'ed2eaca6-4dc1-4929-a58d-181edc5b2f59');
+            
+              INSERT INTO EMPLOYEE(ID, FIRSTNAME, SECONDNAME, EMAIL)
+              VALUES
+              ('384276fc-aa3a-4e99-b798-06a8b7a8164f', 'John', 'Doe', 'john.doe@example.com'),
+              ('0176349f-b3ac-4e68-bf16-7307ffa27ac1', 'Jane', 'Smith', 'jane.smith@example.com');
+            
+              INSERT INTO TEAM_EMPLOYEE(TEAM_ID, EMPLOYEE_ID)
+              VALUES
+              ('91ef70b9-1e6b-439b-b148-0d9d1c43c21c','384276fc-aa3a-4e99-b798-06a8b7a8164f'),
+              ('ed2eaca6-4dc1-4929-a58d-181edc5b2f59','384276fc-aa3a-4e99-b798-06a8b7a8164f'),
+              ('ed2eaca6-4dc1-4929-a58d-181edc5b2f59','0176349f-b3ac-4e68-bf16-7307ffa27ac1');
